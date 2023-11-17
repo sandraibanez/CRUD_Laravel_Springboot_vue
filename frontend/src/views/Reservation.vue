@@ -21,13 +21,17 @@ export default {
         const state = reactive({
             mesas: computed(() => store.getters["mesa/getMesas"])
         })
-
+        console.log(state);
         return { state }
     }
 }
 </script>
 
 <style lang="scss">
+// #AA6B39 #AA8239 #2D4671 #226764
+body{
+    background-color: #e6bf77;
+}
 .container_gallery {
     max-width: 93.5rem;
     margin: 2.43%;

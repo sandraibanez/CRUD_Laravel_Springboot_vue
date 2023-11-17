@@ -38,5 +38,6 @@ body{
     color: #226764;
     font-weight: bold;
     font-size: 3em;
+    margin: 2%;
 }
 </style>

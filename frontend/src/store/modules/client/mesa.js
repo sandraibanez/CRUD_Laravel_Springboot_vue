@@ -7,11 +7,13 @@ export const mesa = {
         [Constant.INITIALIZE_MESA]: (state, payload) => {
             if (payload) {
                 state.mesa = payload;
+                console.log(state.mesa);
             }
         },
         [Constant.INITIALIZE_ONE_STATE_MESA]: (state, payload) => {
             if (payload) {
                 state.OneMesa = payload;
+                console.log(state.OneMesa);
             }
         },
     },//mutations
@@ -42,9 +44,11 @@ export const mesa = {
     },//actions
     getters: {
         getMesas(state) {
+            console.log(state.mesa);
             return state.mesa;
         },
         getOneMesa(state) {
+            console.log(state.OneMesa);
             return state.OneMesa;
         },
     }//getters

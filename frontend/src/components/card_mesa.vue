@@ -12,7 +12,7 @@
                     </span>
                 </div>
             </div>
-            <div class="gallery-item-info">
+            <!-- <div class="gallery-item-info">
                 <ul>
                     <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span>
                         34
@@ -23,7 +23,7 @@
                         <font-awesome-icon icon="fa-solid fa-comment" />
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </main>
 </template>
@@ -54,14 +54,19 @@ export default {
 
     .capacity {
         float: left;
+        font-weight: bold;
+        font-size: 200%;
     }
 
     .cat_name {
         float: right;
-        border: 1px solid lightblue;
-        background-color: lightblue;
+        color: #226764;
+        border: 1px solid rgba(233, 238, 239);
+        background-color: rgba(233, 238, 239);
         border-radius: 10px;
         margin: 1%;
+        font-weight: bold;
+        font-size: 200%;
     }
 
     .visually-hidden {

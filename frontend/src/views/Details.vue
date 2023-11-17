@@ -2,12 +2,12 @@
     <div class="container_mesa_details">
         <div class="gallery">
             <div class="gallery-item" tabindex="0">
-                <img :src="stateOne.mesas?.photo" class="gallery-image" alt="">
+                <img :src="stateOne.mesa?.photo" class="gallery-image" alt=""> 
                 <div class="name">
                     <span class="capacity">
-                        Capacity: {{ stateOne.mesas?.capacity }}
+                        Capacity: {{ stateOne.mesa?.capacity }}
                     </span>
-                    <div class="cat_name" v-for="cat in stateOne.mesas?.categories">
+                    <div class="cat_name" v-for="cat in stateOne.mesa?.categories">
                         <span>
                             {{ cat.name_category }}
                         </span>
@@ -26,18 +26,29 @@ import card_mesa from '../components/card_mesa.vue';
 import Constant from '../Constant';
 export default {
     components: { card_mesa },
-
+    
     setup() {
+     
         const store = useStore();
         const route = useRoute();
         const id = route.params.id;
 
         store.dispatch(`mesa/${Constant.INITIALIZE_ONE_STATE_MESA}`, id)
-
+        
         const stateOne = reactive({
-            mesas: computed(() => store.getters["mesa/getOneMesa"])
+            mesa: computed(() => store.getters["mesa/getOneMesa"])
         })
-
+        // function img() {
+        // return new URL(`stateOne.mesa?.photo`,import.meta.url);
+        //  }
+        // const computedPhotoURL = computed(() => {
+        //     if (stateOne.mesa?.photo) {
+        //     return stateOne.mesa.photo;
+        //     } else {
+        //     return '';
+        //     }
+        // });
+        console.log(stateOne.mesa?.photo);
         return { stateOne }
     }
 }

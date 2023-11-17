@@ -29,7 +29,7 @@ export default {
             router.push({ name: "mesasList" })
             toaster.info("Mesa updated")
         }
-
+        console.log(Constant.UPDATE_ONE_MESA);
         return { stateOne, update_emit }
 
     }

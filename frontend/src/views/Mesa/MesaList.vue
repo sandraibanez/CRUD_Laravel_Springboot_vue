@@ -18,8 +18,14 @@ export default {
         const state = reactive({
             mesas: computed(() => store.getters["mesaDashboard/getMesas"])
         })
-
+        console.log(state.mesas);
         return { state }
     }
 }
 </script>
+
+<style lang="scss">
+body{
+    background-color: #e6bf77;
+}
+</style>

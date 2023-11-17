@@ -12,9 +12,9 @@
                     <li class="page">Dashboard</li>
                 </router-link>
             </ul>
-            <p class="search">
+            <!-- <p class="search">
                 <input class="search-box" type="search" name="search" id="search" placeholder="Search..." />
-            </p>
+            </p> -->
             <router-link to="/home" class="link">
                 <img src="../assets/img/Don_Kamaron_Logo.png">
             </router-link>

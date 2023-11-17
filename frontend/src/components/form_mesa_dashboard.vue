@@ -18,14 +18,14 @@
                 <label>Active</label>
                 <input type="checkbox" name="" required="" v-model="state.mesa.is_active" />
             </div>
-            <label for="cars">Choose a categories:</label>
+            <!-- <label for="cars">Choose a categories:</label>
             <br>
-            <br>
-            <select name="cars" id="cars" multiple v-model="state.mesa.categories">
+            <br> -->
+            <!-- <select name="cars" id="cars" multiple v-model="state.mesa.categories">
                 <option v-for="names in cat.categories" :value="names.name_category">
                     {{ names.name_category }}
                 </option>
-            </select>
+            </select> -->
             <br><br>
             <a @click="createSubmit()" v-if="!isUpdate">
                 <span></span>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+
 import { reactive, getCurrentInstance, computed } from 'vue'
 import { useRouter } from 'vue-router';
 import Constant from '../Constant';

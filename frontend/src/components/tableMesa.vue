@@ -68,6 +68,9 @@ export default {
 }
 </script>
 <style lang="scss">
+body{
+    background-color: #e6bf77;
+}
 body.tableMesa {
     font-family: "Roboto", helvetica, arial, sans-serif;
     font-size: 16px;
