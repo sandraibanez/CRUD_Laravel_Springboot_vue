@@ -77,4 +77,16 @@ export default {
 
 <style lang="scss">
 @import 'datatables.net-dt';
+button{
+    margin:0.5%;
+    padding: 0.5em;
+    height: auto;
+    line-height: 1;
+    border-color: #4daea9;
+    background-color: #4daea9;
+    color:#2D4671;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 30px;
+}
 </style>

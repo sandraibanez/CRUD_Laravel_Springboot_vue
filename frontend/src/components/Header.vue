@@ -47,7 +47,7 @@ export default {
         font-family: Arial, Helvetica, sans-serif;
         background-color: #2D4671;
         width: 100%;
-        height: 90px;
+        height: 95px;
         display: flex;
         flex-direction: row-reverse;
         align-items: center;

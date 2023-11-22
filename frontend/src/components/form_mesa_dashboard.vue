@@ -18,14 +18,15 @@
                 <label>Active</label>
                 <input type="checkbox" name="" required="" v-model="state.mesa.is_active" />
             </div>
-            <!-- <label for="cars">Choose a categories:</label>
+            <label for="cars">Choose a categories:</label>
             <br>
-            <br> -->
-            <!-- <select name="cars" id="cars" multiple v-model="state.mesa.categories">
+            <br>
+            
+            <select name="cars" id="cars" multiple v-model="state.mesa.categories">
                 <option v-for="names in cat.categories" :value="names.name_category">
                     {{ names.name_category }}
                 </option>
-            </select> -->
+            </select>
             <br><br>
             <a @click="createSubmit()" v-if="!isUpdate">
                 <span></span>
@@ -78,7 +79,9 @@ export default {
         const store = useStore();
 
         const state = reactive({
-            mesa: { ...mesa }
+                mesa: { ...mesa },
+            categories: computed(() => store.getters['categoryDashboard/GetCategories'])
+        
         });
 
         state.mesa.is_active = Boolean(state.mesa.is_active);
@@ -88,7 +91,7 @@ export default {
         const cat = reactive({
             categories: computed(() => store.getters['categoryDashboard/GetCategories'])
         });
-
+        
         const createSubmit = () => {
             emit('data', state.mesa)
         }
@@ -96,6 +99,7 @@ export default {
         const editSubmit = () => {
             emit('data', state.mesa)
         }
+        
         const cancel = () => {
             router.push({ name: "mesasList" })
         }
@@ -105,12 +109,17 @@ export default {
 </script>
 
 <style lang="scss">
+
+body{
+    background-color: #e6bf77;
+}
 .login-box {
     position: absolute;
     top: 70%;
     left: 50%;
     width: 400px;
     padding: 40px;
+    margin-top:1%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
@@ -145,7 +154,7 @@ export default {
             &:valid~label {
                 top: -20px;
                 left: 0;
-                color: #03e9f4;
+                color: #4daea9;
                 font-size: 12px;
             }
         }
@@ -155,7 +164,7 @@ export default {
         position: relative;
         display: inline-block;
         padding: 10px 20px;
-        color: #03e9f4;
+        color: #4daea9;
         font-size: 16px;
         text-decoration: none;
         text-transform: uppercase;
@@ -167,10 +176,10 @@ export default {
 
     a {
         &:hover {
-            background: #03e9f4;
+            background: #4daea9;
             color: #fff;
             border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
+            box-shadow: 0 0 5px #4daea9, 0 0 5px #4daea9, 0 0 20px #4daea9, 0 0 50px #4daea9;
         }
 
         span {
@@ -182,7 +191,7 @@ export default {
                 left: -100%;
                 width: 100%;
                 height: 2px;
-                background: linear-gradient(90deg, transparent, #03e9f4);
+                background: linear-gradient(90deg, transparent, #4daea9);
                 animation: btn-anim1 1s linear infinite;
             }
 
@@ -191,7 +200,7 @@ export default {
                 right: 0;
                 width: 2px;
                 height: 100%;
-                background: linear-gradient(180deg, transparent, #03e9f4);
+                background: linear-gradient(180deg, transparent, #4daea9);
                 animation: btn-anim2 1s linear infinite;
                 animation-delay: 0.25s;
             }
@@ -201,7 +210,7 @@ export default {
                 right: -100%;
                 width: 100%;
                 height: 2px;
-                background: linear-gradient(270deg, transparent, #03e9f4);
+                background: linear-gradient(270deg, transparent, #4daea9);
                 animation: btn-anim3 1s linear infinite;
                 animation-delay: 0.5s;
             }
@@ -211,7 +220,7 @@ export default {
                 left: 0;
                 width: 2px;
                 height: 100%;
-                background: linear-gradient(360deg, transparent, #03e9f4);
+                background: linear-gradient(360deg, transparent, #4daea9);
                 animation: btn-anim4 1s linear infinite;
                 animation-delay: 0.75s;
             }

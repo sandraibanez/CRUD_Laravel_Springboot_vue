@@ -139,14 +139,14 @@ body.tableMesa {
     tr {
         border-top: 1px solid #C1C3D1;
         border-bottom: 1px solid #C1C3D1;
-        color: #666B85;
+        color: #666b85;
         font-size: 16px;
         font-weight: normal;
         text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
     }
 
     tr:hover td {
-        background: #4E5066;
+        background: #4e50666d;
         color: #FFFFFF;
         border-top: 1px solid #22262e;
     }
@@ -164,7 +164,7 @@ body.tableMesa {
     }
 
     tr:nth-child(odd):hover td {
-        background: #4E5066;
+        background: #4e506658;
     }
 
     tr:last-child td:first-child {
@@ -229,14 +229,14 @@ body.tableMesa {
 }
 
 body.tableMesa {
-    $colors: (pulse: #ef6eae,
+    $colors: (pulse: #2D4671,
     );
 
     @each $button,
     $color in $colors {
         .#{$button} {
             --color: #{$color};
-            --hover: #{adjust-hue($color, 45deg)};
+            // --hover: #{adjust-hue($color, 45deg)};
         }
     }
 
@@ -258,6 +258,23 @@ body.tableMesa {
         line-height: 1;
         margin: 0.5em;
         padding: 1em 2em;
+        border-radius: 10px;
     }
+}
+table{
+    margin: 0 auto;
+    width: 90%;
+}
+.form-inline.pull-left button{
+    margin:0.5%;
+    padding: 0.5em;
+    height: auto;
+    line-height: 1;
+    border-color: #4daea9;
+    background-color: #4daea9;
+    color:#2D4671;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 30px;
 }
 </style>

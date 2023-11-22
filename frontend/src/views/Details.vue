@@ -2,7 +2,7 @@
     <div class="container_mesa_details">
         <div class="gallery">
             <div class="gallery-item" tabindex="0">
-                <img :src="stateOne.mesa?.photo" class="gallery-image" alt=""> 
+                <img :src="'/src/assets/img/' + stateOne.mesa?.photo" class="gallery-image" alt=""> 
                 <div class="name">
                     <span class="capacity">
                         Capacity: {{ stateOne.mesa?.capacity }}
@@ -38,16 +38,7 @@ export default {
         const stateOne = reactive({
             mesa: computed(() => store.getters["mesa/getOneMesa"])
         })
-        // function img() {
-        // return new URL(`stateOne.mesa?.photo`,import.meta.url);
-        //  }
-        // const computedPhotoURL = computed(() => {
-        //     if (stateOne.mesa?.photo) {
-        //     return stateOne.mesa.photo;
-        //     } else {
-        //     return '';
-        //     }
-        // });
+       
         console.log(stateOne.mesa?.photo);
         return { stateOne }
     }
@@ -55,6 +46,9 @@ export default {
 </script>
 
 <style lang="scss">
+body{
+    background-color: #e6bf77;
+}
 .container_mesa_details {
     max-width: 1em;
     margin-left: 37%;
@@ -71,14 +65,19 @@ export default {
 
     .capacity {
         float: left;
+        font-weight: bold;
+        font-size: 170%;
     }
 
     .cat_name {
         float: right;
-        border: 1px solid lightblue;
-        background-color: lightblue;
+        color: #226764;
+        border: 1px solid rgba(233, 238, 239);
+        background-color: rgba(233, 238, 239);
         border-radius: 10px;
         margin: 1%;
+        font-weight: bold;
+        font-size: 170%;
     }
 
     .visually-hidden {

@@ -115,7 +115,7 @@ export default {
             &:valid~label {
                 top: -20px;
                 left: 0;
-                color: #03e9f4;
+                color: #4daea9;
                 font-size: 12px;
             }
         }
@@ -125,7 +125,7 @@ export default {
         position: relative;
         display: inline-block;
         padding: 10px 20px;
-        color: #03e9f4;
+        color: #4daea9;
         font-size: 16px;
         text-decoration: none;
         text-transform: uppercase;
@@ -137,10 +137,10 @@ export default {
 
     a {
         &:hover {
-            background: #03e9f4;
+            background: #4daea9;
             color: #fff;
             border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
+            box-shadow: 0 0 5px #4daea9, 0 0 5px #4daea9, 0 0 20px #4daea9, 0 0 50px #4daea9;
         }
 
         span {
@@ -152,7 +152,7 @@ export default {
                 left: -100%;
                 width: 100%;
                 height: 2px;
-                background: linear-gradient(90deg, transparent, #03e9f4);
+                background: linear-gradient(90deg, transparent, #4daea9);
                 animation: btn-anim1 1s linear infinite;
             }
 
@@ -161,7 +161,7 @@ export default {
                 right: 0;
                 width: 2px;
                 height: 100%;
-                background: linear-gradient(180deg, transparent, #03e9f4);
+                background: linear-gradient(180deg, transparent, #4daea9);
                 animation: btn-anim2 1s linear infinite;
                 animation-delay: 0.25s;
             }
@@ -171,7 +171,7 @@ export default {
                 right: -100%;
                 width: 100%;
                 height: 2px;
-                background: linear-gradient(270deg, transparent, #03e9f4);
+                background: linear-gradient(270deg, transparent, #4daea9);
                 animation: btn-anim3 1s linear infinite;
                 animation-delay: 0.5s;
             }
@@ -181,7 +181,7 @@ export default {
                 left: 0;
                 width: 2px;
                 height: 100%;
-                background: linear-gradient(360deg, transparent, #03e9f4);
+                background: linear-gradient(360deg, transparent, #4daea9);
                 animation: btn-anim4 1s linear infinite;
                 animation-delay: 0.75s;
             }

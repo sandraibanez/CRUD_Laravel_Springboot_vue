@@ -18,6 +18,7 @@ export default {
         const store = useStore();
 
         const create_emit = (mesa) => {
+            console.log(mesa);
             store.dispatch(`mesaDashboard/${Constant.CREATE_ONE_MESA}`, mesa);
             router.push({ name: "mesasList" })
             toaster.info("Mesa created")

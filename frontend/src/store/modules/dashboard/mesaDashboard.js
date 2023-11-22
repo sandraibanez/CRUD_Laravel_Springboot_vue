@@ -37,7 +37,7 @@ export const mesaDashboard = {
         [Constant.INITIALIZE_MESA]: async (store) => {
             try {
                 const response = await MesaServiceDashboard.GetMesas();
-                // console.log(response);
+                console.log(response);
                 console.log(response.data);
                 store.commit(Constant.INITIALIZE_MESA, response.data);
             } catch (error) {
@@ -70,12 +70,14 @@ export const mesaDashboard = {
         [Constant.UPDATE_ONE_MESA]: async (store, payload) => {
             try {
                 console.log('hola');
+                console.log(payload);
                 const update ={
                     id: payload.id,
                     name_mesa: payload.name_mesa,
                     capacity: payload.capacity,
                     is_active: payload.is_active,
-                    photo: payload.photo
+                    photo: payload.photo,
+                    categories: payload.categories
                 }
                 const response = await MesaServiceDashboard.UpdateOneMesa(update);
                 if (response.status == 200) {
