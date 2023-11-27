@@ -1,10 +1,13 @@
 <template>
     <main class="cardMesa">
         <div class="gallery-item" tabindex="0" @click="showDetails(mesa.id)">
-            <img :src="mesa.photo" class="gallery-image" alt="">
+            <img :src="'/src/assets/img/' + mesa.photo" class="gallery-image" alt="">
             <div class="name">
                 <span class="capacity">
                     Capacity: {{ mesa.capacity }}
+                </span>
+                <span class="capacity">
+                    Name: {{ mesa.name_mesa }}
                 </span>
                 <div class="cat_name" v-for="cat in mesa.categories">
                     <span>
@@ -31,7 +34,7 @@
 <script>
 import { useRouter } from 'vue-router';
 
-
+console.log('hola card_mesa');
 export default {
     props: {
         mesa: Object

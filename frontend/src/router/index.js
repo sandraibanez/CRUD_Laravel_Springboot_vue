@@ -23,6 +23,12 @@ const router = createRouter({
       component: () => import('../views/Details.vue')
     },
     {
+      path: "/reservation/:filters",
+      name: "reservationFilters",
+      component: () => import('../views/Reservation.vue')
+    },
+    ,
+    {
       path: "/dashboard",
       name: "dashboard",
       component: () => import('../views/Dashboard.vue')

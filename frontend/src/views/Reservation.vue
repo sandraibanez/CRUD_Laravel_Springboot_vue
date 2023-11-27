@@ -1,28 +1,57 @@
 <template>
-    <div class="container_gallery">
+    <div class="container_gallery" v-if="state.mesas.length > 0">
         <div class="gallery">
             <card_mesa v-for="mesa in state.mesas" :key="mesa.id" :mesa="mesa" />
         </div>
+    </div>
+    <div v-else>
+        <span>No tables</span>
     </div>
 </template>
 
 <script>
 import { reactive, computed } from 'vue'
-import { useStore } from 'vuex'
-import Constant from '../Constant';
+// import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+// import Constant from '../Constant';
+import { useMesaFilters } from '../composables/mesas/useMesa';
 import card_mesa from '../components/card_mesa.vue';
+
+
+
+console.log('hola');
 export default {
     components: { card_mesa },
     setup() {
-        const store = useStore();
+    //     // const store = useStore();
+    //     const route = useRoute();
+    //     // const router = useRouter();
+    //     // store.dispatch(`mesa/${Constant.INITIALIZE_MESA}`)
 
-        store.dispatch(`mesa/${Constant.INITIALIZE_MESA}`)
+    //     // const state = reactive({
+    //     //     mesas: computed(() => store.getters["mesa/getMesas"])
+    //     // })
+    //     // console.log(state);
 
-        const state = reactive({
-            mesas: computed(() => store.getters["mesa/getMesas"])
-        })
-        console.log(state);
-        return { state }
+    const route = useRoute();
+    
+
+    let filters_URL = {
+        categories: [],
+    };
+    console.log(filters_URL);
+    try {
+        if (route.params.filters !== '') {
+            filters_URL = JSON.parse(atob(route.params.filters));
+        }
+    } catch (error) {}
+
+    const state = reactive({
+        mesas: useMesaFilters(filters_URL)
+    });
+    console.log(state.mesas);
+
+    return { state, card_mesa }
     }
 }
 </script>

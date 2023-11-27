@@ -2,13 +2,15 @@
     <h1 class="header_title">
      ~  Categories  ~
     </h1>
-    <carouselVue :data="state.categories"/>
+    <carouselVue :data="state.categories" v-if="state.categories" @emitAction="redirectReservation" />
+    <!-- <carouselVue :data="state.categories"/> -->
 </template> 
 
 <script>
 // #AA6B39 #AA8239 #2D4671 #226764
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import Constant from '../Constant';
 import carouselVue from '../components/carousel.vue';
 
@@ -16,15 +18,27 @@ export default {
     components: { carouselVue },
     setup() {
         const store = useStore();
+        const router = useRouter();
 
         store.dispatch(`category/${Constant.INITIALIZE_CATEGORY}`);
         
         const state = reactive({
-            categories: computed(() => store.getters['category/GetCategories'])
+            categories: computed(() => store.getters['category/GetCategories']),
         });
-        console.log(state);
-
-        return { state };
+        
+        const redirectReservation = (item) => {
+            
+            console.log(item);
+            const filters = {
+                categories: [item.name_category],
+            };
+            const filters_ = btoa(JSON.stringify(filters));
+            console.log(filters_);
+            router.push({ name: "reservationFilters", params: { filters: filters_ } });
+        }
+        
+        console.log(state.categories);
+        return { state, redirectReservation };
     }
 }
 </script>

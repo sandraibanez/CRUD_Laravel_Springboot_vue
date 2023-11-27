@@ -70,7 +70,7 @@ export const mesaDashboard = {
         [Constant.UPDATE_ONE_MESA]: async (store, payload) => {
             try {
                 console.log('hola');
-                console.log(payload);
+                // console.log(payload);
                 const update ={
                     id: payload.id,
                     name_mesa: payload.name_mesa,
