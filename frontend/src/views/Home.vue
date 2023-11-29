@@ -3,6 +3,8 @@
      ~  Categories  ~
     </h1>
     <carouselVue :data="state.categories" v-if="state.categories" @emitAction="redirectReservation" />
+    <br>
+    <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" />
     <!-- <carouselVue :data="state.categories"/> -->
 </template> 
 
@@ -13,10 +15,11 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import Constant from '../Constant';
 import carouselVue from '../components/carousel.vue';
-
+import bigestTablesVue from '../components/bigestTables.vue';
+import { useMesaInfinite } from '../composables/mesas/useMesa';
 export default {
-    components: { carouselVue },
-    setup() {
+    components: { carouselVue, bigestTablesVue },
+    setup() { 
         const store = useStore();
         const router = useRouter();
 
@@ -24,6 +27,7 @@ export default {
         
         const state = reactive({
             categories: computed(() => store.getters['category/GetCategories']),
+            mesasInfinite: useMesaInfinite(1, 4),
         });
         
         const redirectReservation = (item) => {
@@ -31,14 +35,17 @@ export default {
             console.log(item);
             const filters = {
                 categories: [item.name_category],
+                page: 1,
+                limit: 9,
             };
             const filters_ = btoa(JSON.stringify(filters));
-            console.log(filters_);
             router.push({ name: "reservationFilters", params: { filters: filters_ } });
         }
-        
-        console.log(state.categories);
-        return { state, redirectReservation };
+        const addInfinite = (page) => {
+            state.mesasInfinite = useMesaInfinite(page, 4);
+        }
+
+        return { state, redirectReservation, addInfinite };
     }
 }
 </script>
