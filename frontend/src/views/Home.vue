@@ -4,8 +4,14 @@
     </h1>
     <carouselVue :data="state.categories" v-if="state.categories" @emitAction="redirectReservation" />
     <br>
+    <h1 class="header_title">
+            
+            ~ Biggest Tables ~
+           
+    </h1>
+    <br>
     <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" />
-    <!-- <carouselVue :data="state.categories"/> -->
+
 </template> 
 
 <script>

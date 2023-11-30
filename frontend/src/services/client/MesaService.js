@@ -19,11 +19,18 @@ export default {
         console.log(params);
         return Api(secrets.URL_SPRING).get(`mesa?${this.FormatFilters(params)}`);
     },//GetMesas
-    // GetMesas() {
-    //     return Api(secrets.URL_SPRING).get('mesa');
-    // },//GetMesas
+    GetMesascapacity(params) {
+        console.log('filter2',params);
+        return Api(secrets.URL_SPRING).get(`mesagetcapacity?${this.FormatFilters(params)}`);
+    },//GetMesascapacity
+    GetMesascapacitycategory(params) {
+        console.log('filter3',params);
+        return Api(secrets.URL_SPRING).get(`mesagetcapacity2?${this.FormatFilters(params)}`);
+    },//GetMesascapacity
+    GetMesasPaginate(params) {
+        return Api(secrets.URL_SPRING).get(`mesaPaginate?${this.FormatFilters(params)}`);
+    },//GetMesas
     GetMesasInfinite(page, limit) {
-        console.log(page,limit);
         return Api(secrets.URL_SPRING).get('mesaInfinite', { params: { page: page, limit: limit } });
     },//GetOneMesa
     GetOneMesa(id) {

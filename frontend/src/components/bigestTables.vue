@@ -1,10 +1,6 @@
 <template>
     <div class="infinite-container">
-        <h1 class="header_title">
-            
-           ~ Biggest Tables ~
-          
-        </h1>
+        
         <div class="container_gallery" v-if="data.length > 0">
             <div class="gallery">
                 <card_mesaVue v-for="mesa in data" :key="mesa.id" :mesa="mesa" />

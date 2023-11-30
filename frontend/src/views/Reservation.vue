@@ -1,43 +1,45 @@
 <template>
+    <filters @filters="ApplyFilters" @deleteFilters="deleteAllFilters" :filters="filters_URL" />
     <div class="container_gallery" v-if="state.mesas.length > 0">
         <div class="gallery">
             <card_mesa v-for="mesa in state.mesas" :key="mesa.id" :mesa="mesa" />
         </div>
+        <div class="paginacion">
+            <paginate v-model="state.page" :page-count="state.totalPages" :page-range="3" :margin-pages="2"
+                :click-handler="clickCallback" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'"
+                :page-class="'page-item'">
+            </paginate>
+        </div>
     </div>
     <div v-else>
         <span>No tables</span>
+        <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" />
     </div>
 </template>
 
 <script>
 import { reactive, computed } from 'vue'
-// import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
-// import Constant from '../Constant';
+import { useRouter, useRoute } from 'vue-router';
+import filters from '../components/filters.vue';
 import { useMesaFilters } from '../composables/mesas/useMesa';
-import card_mesa from '../components/card_mesa.vue';
-
-
-
-console.log('hola');
+import card_mesa from '../components/card_mesa.vue'; 
+import Paginate from 'vuejs-paginate-next';
+import bigestTablesVue from '../components/bigestTables.vue';
+import { useMesaInfinite } from '../composables/mesas/useMesa';
 export default {
-    components: { card_mesa },
+    components: { card_mesa,filters,Paginate, bigestTablesVue},
     setup() {
-    //     // const store = useStore();
-    //     const route = useRoute();
-    //     // const router = useRouter();
-    //     // store.dispatch(`mesa/${Constant.INITIALIZE_MESA}`)
-
-    //     // const state = reactive({
-    //     //     mesas: computed(() => store.getters["mesa/getMesas"])
-    //     // })
-    //     // console.log(state);
-
+        console.log('filters');
     const route = useRoute();
-    
+    const router = useRouter(); 
 
     let filters_URL = {
         categories: [],
+        capacity: 0,
+        order: 0,
+        name_mesa: "",
+        page: 1,
+        limit: 9,
     };
     console.log(filters_URL);
     try {
@@ -47,16 +49,46 @@ export default {
     } catch (error) {}
 
     const state = reactive({
-        mesas: useMesaFilters(filters_URL)
+        mesas: useMesaFilters(filters_URL),
+        mesasInfinite: useMesaInfinite(1, 4)
     });
-    console.log(state.mesas);
 
-    return { state, card_mesa }
+    const ApplyFilters = (filters) => {
+            const filters_64 = btoa(JSON.stringify(filters));
+            router.push({ name: "reservationFilters", params: { filters: filters_64 } });
+            state.mesas = useMesaFilters(filters);
+            state.totalPages = useMesaPaginate(filters);
+        }
+
+    const deleteAllFilters = (deleteFilters) => {
+        router.push({ name: "reservation" });
+        state.mesas = useMesaFilters(deleteFilters);
+        state.page = 1;
+        filters_URL = deleteFilters;
+        state.totalPages = useMesaPaginate(deleteFilters);
+    }
+
+    const clickCallback = (pageNum) => {
+        try {
+            if (route.params.filters !== '') {
+                filters_URL = JSON.parse(atob(route.params.filters));
+            }
+        } catch (error) {
+        }
+        filters_URL.page = pageNum;
+        state.page = pageNum;
+        ApplyFilters(filters_URL)
+    }
+    const addInfinite = (page) => {
+            state.mesasInfinite = useMesaInfinite(page, 4);
+        }
+    return { state, card_mesa,ApplyFilters, deleteAllFilters, filters_URL,clickCallback,addInfinite }
     }
 }
 </script>
 
 <style lang="scss">
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
 // #AA6B39 #AA8239 #2D4671 #226764
 body{
     background-color: #e6bf77;
@@ -73,7 +105,9 @@ body{
     margin: -1rem -1rem;
     padding-bottom: 3rem;
 }
-
+.paginacion{
+   margin-left: 40%;
+}
 @supports (display: grid) {
     .gallery {
         display: grid;
