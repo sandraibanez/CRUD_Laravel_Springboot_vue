@@ -27,6 +27,10 @@ export default {
         console.log('filter3',params);
         return Api(secrets.URL_SPRING).get(`mesagetcapacity2?${this.FormatFilters(params)}`);
     },//GetMesascapacity
+    GetMesasall(params) {
+        console.log('filter4',params);
+        return Api(secrets.URL_SPRING).get(`mesaall?${this.FormatFilters(params)}`);
+    },//GetMesascapacity
     GetMesasPaginate(params) {
         return Api(secrets.URL_SPRING).get(`mesaPaginate?${this.FormatFilters(params)}`);
     },//GetMesas

@@ -16,14 +16,14 @@ export const useMesaFilters = (filters = {}) => {
     MesaService.GetMesas(filter1)
         .then(res => { mesas.value = res.data })
         .catch(error => console.error(error))
-        const filter3 ={
-            capacity: filters.capacity,
-            page: filters.page,
-            limit: filters.limit
-        }
-        MesaService.GetMesascapacitycategory(filter3)
-            .then(res => { mesas.value = res.data })
-            .catch(error => console.error(error))
+    const filter3 ={
+        capacity: filters.capacity,
+        page: filters.page,
+        limit: filters.limit
+    }
+    MesaService.GetMesascapacitycategory(filter3)
+        .then(res => { mesas.value = res.data })
+        .catch(error => console.error(error))
     // filtro de only capacity y category with capacity
     const filter2 ={
         capacity: filters.capacity,
@@ -34,8 +34,17 @@ export const useMesaFilters = (filters = {}) => {
     MesaService.GetMesascapacity(filter2)
         .then(res => { mesas.value = res.data })
         .catch(error => console.error(error))
+    if (filters.capacity == '' &&  filters.categories == '' && filters.name_mesa == '' && filters.order == ''){
+    console.log('hola');
+        const filter4 ={
+        page: filters.page,
+        limit: filters.limit
+    }
+    MesaService.GetMesasall(filter4)
+        .then(res => { mesas.value = res.data })
+        .catch(error => console.error(error))
     
-       
+    }
     return mesas;
 };
 

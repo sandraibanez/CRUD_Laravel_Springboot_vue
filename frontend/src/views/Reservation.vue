@@ -13,7 +13,7 @@
     </div>
     <div v-else>
         <span>No tables</span>
-        <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" />
+        <!-- <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" /> -->
     </div>
 </template>
 

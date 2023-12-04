@@ -65,13 +65,7 @@ public class MesaController {
 					mesaRepository.findOrderedDESC(mesaQueryParam.getName_mesa(),mesaQueryParam.getLimit(), offset)
 							.forEach(mesas::add);
 				}
-			} 
-			// else // Only capacity
-			// if( mesaQueryParam.getCategories() == null && mesaQueryParam.getCapacity() > 0 ){
-			// 			mesaRepository
-			// 			.findByCapacity(mesaQueryParam.getCapacity(),mesaQueryParam.getLimit(), offset)
-			// 			.forEach(mesas::add);
-			// }
+			}
 			return new ResponseEntity<>(mesas, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println(e);
@@ -90,12 +84,6 @@ public class MesaController {
 				.findByCapacityAndCategories(mesaQueryParam.getCapacity(), mesaQueryParam.getCategories(), mesaQueryParam.getLimit(), offset)
 				.forEach(mesas::add);
 			}
-			// // Only capacity
-			// if( mesaQueryParam.getCategories() == null && mesaQueryParam.getCapacity() > 0 ){
-			// 			mesaRepository
-			// 			.findByCapacity(mesaQueryParam.getCapacity(),mesaQueryParam.getLimit(), offset)
-			// 			.forEach(mesas::add);
-			// }
 			
 			
 			return new ResponseEntity<>(mesas, HttpStatus.OK);
@@ -114,6 +102,26 @@ public class MesaController {
 			if( mesaQueryParam.getCategories() == null && mesaQueryParam.getCapacity() > 0 ){
 						mesaRepository
 						.findByCapacity(mesaQueryParam.getCapacity(),mesaQueryParam.getLimit(), offset)
+						.forEach(mesas::add);
+			}
+			
+			
+			return new ResponseEntity<>(mesas, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println(e);
+			// return mesaQueryParam;
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@GetMapping("/mesaall")
+	public ResponseEntity<List<Mesa>> getall(@ModelAttribute MesaQueryParam mesaQueryParam) {
+		try {
+			mesaQueryParam.setName_mesa(mesaQueryParam.getName_mesa() + '%');
+			Integer offset = (mesaQueryParam.getPage() - 1) * mesaQueryParam.getLimit();
+			List<Mesa> mesas = new ArrayList<Mesa>();
+			if( mesaQueryParam.getCategories() == null && mesaQueryParam.getCapacity() == null 
+				&& mesaQueryParam.getOrder() == null){
+				mesaRepository.findActive( mesaQueryParam.getLimit(), offset)
 						.forEach(mesas::add);
 			}
 			
