@@ -35,7 +35,7 @@ export const useMesaFilters = (filters = {}) => {
         .then(res => { mesas.value = res.data })
         .catch(error => console.error(error))
     if (filters.capacity == '' &&  filters.categories == '' && filters.name_mesa == '' && filters.order == ''){
-    console.log('hola');
+    // console.log('hola');
         const filter4 ={
         page: filters.page,
         limit: filters.limit

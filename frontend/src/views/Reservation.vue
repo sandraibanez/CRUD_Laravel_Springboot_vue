@@ -11,9 +11,8 @@
             </paginate>
         </div>
     </div>
-    <div v-else>
-        <span>No tables</span>
-        <!-- <bigestTablesVue :data="state.mesasInfinite" @page="addInfinite" /> -->
+    <div class="not_table" v-else>
+        <span>~No tables~</span>
     </div>
 </template>
 
@@ -107,6 +106,13 @@ body{
 }
 .paginacion{
    margin-left: 40%;
+}
+.not_table{
+    text-align: center;
+    color: #226764;
+    font-weight: bold;
+    font-size: 3em;
+    margin: 2%;
 }
 @supports (display: grid) {
     .gallery {
