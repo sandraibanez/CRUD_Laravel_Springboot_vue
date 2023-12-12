@@ -56,34 +56,40 @@ const router = createRouter({
     {
       path: "/dashboard/categories",
       name: "categoriesList",
-      component: () => import('../views/Category/CategoryList.vue')
+      component: () => import('../views/Category/CategoryList.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
     {
       path: "/dashboard/categories/create",
       name: "categoriesCreate",
-      component: () => import('../views/Category/CategoryCreate.vue')
+      component: () => import('../views/Category/CategoryCreate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
     {
       path: "/dashboard/categories/update/:id",
       name: "categoriesUpdate",
-      component: () => import('../views/Category/CategoryUpdate.vue')
+      component: () => import('../views/Category/CategoryUpdate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
 
     // //Mesa dashboard//
     {
       path: "/dashboard/mesas",
       name: "mesasList",
-      component: () => import('../views/Mesa/MesaList.vue')
+      component: () => import('../views/Mesa/MesaList.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
     {
       path: "/dashboard/mesas/update/:id",
       name: "updateMesa",
-      component: () => import('../views/Mesa/MesaUpdate.vue')
+      component: () => import('../views/Mesa/MesaUpdate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
     {
       path: "/dashboard/mesas/create",
       name: "createMesa",
-      component: () => import('../views/Mesa/MesaCreate.vue')
+      component: () => import('../views/Mesa/MesaCreate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
   ]
 })
