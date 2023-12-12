@@ -12,4 +12,15 @@ export default {
     ADD_CATEGORY: "AddCategory",
     DELETE_CATEGORY: "DeleteCategory",
     UPDATE_CATEGORY: "UpdateCategory",
+
+    ///USER
+    INITIALIZE_PROFILE: "InitializeProfile",
+    INITIALIZE_USER: "InitializeUser",
+    INITIALIZE_ONE_USER: "InitializeOneUser",
+    ADD_USER: "AddUser",
+    DELETE_USER: "DeleteUser",
+    UPDATE_USER: "UpdateUser",
+    LOGIN: "Login",
+    LOGIN_ADMIN: "Login_admin",
+    LOGOUT: "Logout",
 }

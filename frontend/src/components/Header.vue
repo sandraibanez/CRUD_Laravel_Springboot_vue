@@ -1,45 +1,78 @@
 <template>
     <nav class="header">
         <div class="countainer">
-            <ul class="pages">
-                <router-link to="/home" class="link" :class="{ active: isHome }">
-                    <li class="page">Home</li>
-                </router-link>
-                <router-link to="/reservation" class="link" :class="{ active: isReservation }">
-                    <li class="page">Reservation</li>
-                </router-link>
-                <router-link to="/dashboard" class="link" :class="{ active: isDashboard }">
-                    <li class="page">Dashboard</li>
-                </router-link>
+            <ul class="pages" :key="state.profile.username">
+                <li @click="redirects.home()" class="page link" :class="{ active: isHome }">Home</li>
+                <li @click="redirects.reservation()" class="page link" :class="{ active: isReservation }">Reservation
+                </li>
+                <li v-if="state.isAdmin" @click="redirects.dashboard()" class="page link"
+                    :class="{ active: isDashboard }">Dashboard</li>
+                <li v-if="!state.isLogged" @click="redirects.login()" class="page link" :class="{ active: isLogin }">
+                    Login</li>
+                <li v-if="state.isLogged" @click="redirects.profile()" class="page link">{{ state.profile.username }}
+                </li>
+                <li @click="logout()" v-if="state.isLogged" class="page link">Log Out</li>
             </ul>
-            <!-- <p class="search">
-                <input class="search-box" type="search" name="search" id="search" placeholder="Search..." />
-            </p> -->
-            <router-link to="/home" class="link">
+            <search-vue v-if="!isReservation" />
+            <div class="link" @click="redirects.home()">
                 <img src="../assets/img/Don_Kamaron_Logo.png">
-            </router-link>
+            </div>
         </div>
     </nav>
 </template>
 
 <script>
-
+import searchVue from './search.vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { reactive, computed } from 'vue';
+import Constant from '../Constant';
 export default {
+    components: { searchVue },
     computed: {
         isHome() {
             return this.$route.name == 'home'
         },
         isReservation() {
-            return this.$route.name == 'reservation'
+            const path = this.$route.path.split('/');
+            if (this.$route.name == undefined || this.$route.name == 'updateReservationUser') {
+            } else {
+                sessionStorage.removeItem("reservations")
+            }
+            return path[1] == 'reservation';
         },
         isDashboard() {
             const path = this.$route.path.split('/');
             return path[1] == 'dashboard';
         },
+        isLogin() {
+            return this.$route.name == 'login'
+        },
+    },
+    setup() {
+        const router = useRouter();
+        const store = useStore();
+        const redirects = {
+            home: () => router.push({ name: 'home' }),
+            reservation: () => router.push({ name: 'reservation' }),
+            dashboard: () => router.push({ name: 'dashboard' }),
+            login: () => router.push({ name: 'login' }),
+            profile: () => router.push({ name: 'profile' }),
+        };
+
+        const state = reactive({
+            profile: computed(() => store.getters['user/GetProfile']),
+            isAdmin: computed(() => store.getters['user/GetIsAdmin']),
+            isLogged: computed(() => store.getters['user/GetIsAuth']),
+        });
+
+        const logout = () => {
+            store.dispatch(`user/${Constant.LOGOUT}`);
+        }
+        return { redirects, state, logout };
     }
 }
 </script>
-
 <style lang="scss">
 .header {
 
