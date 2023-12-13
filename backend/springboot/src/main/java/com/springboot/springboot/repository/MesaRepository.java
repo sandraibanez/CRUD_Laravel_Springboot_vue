@@ -2,7 +2,6 @@ package com.springboot.springboot.repository;
 
 import java.util.List;
 
-//import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -80,5 +79,8 @@ public interface MesaRepository extends JpaRepository<Mesa, Long> {
     Integer findByCapacityAndCategoriesPaginate(@Param("capacity") Number capacity,
             @Param("categories") String[] categories);
 
+    // List mesas of 1 user
+    @Query(value = "SELECT DISTINCT m.* FROM mesas m INNER JOIN reservations r WHERE m.id = r.mesa_id AND r.user_id = :user_id", nativeQuery = true)
+        List<Mesa> showUserReservation(@Param("user_id") Long user_id);
    
 }
