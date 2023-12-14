@@ -31,6 +31,10 @@ export default {
         console.log('filters');
     const route = useRoute();
     const router = useRouter(); 
+    localStorage.removeItem("id_reserv");
+    localStorage.removeItem("id_mesa");
+    localStorage.removeItem("mesa_type_reservation");
+    localStorage.removeItem("mesa_fecha");
 
     let filters_URL = {
         categories: [],

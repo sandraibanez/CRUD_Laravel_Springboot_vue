@@ -15,32 +15,61 @@
                 </div>
             </div>
         </div>
+        <form_details :reservations="stateOne.mesa" :key="stateOne.mesa" @send_data="reservation_emit" />
     </div>
 </template>
 
 <script>
 import { reactive, computed } from 'vue'
 import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import card_mesa from '../components/card_mesa.vue';
 import Constant from '../Constant';
+import form_details from '../components/form_details.vue';
+import { useReservationCreate } from '../composables/reservation/useReservation';
+// import { useReservationCreate } from '../composables/reservation/useReservation'
 export default {
-    components: { card_mesa },
+    components: { card_mesa,form_details },
     
     setup() {
-     
+        
         const store = useStore();
         const route = useRoute();
+        const router = useRouter();
         const id = route.params.id;
-
-        store.dispatch(`mesa/${Constant.INITIALIZE_ONE_STATE_MESA}`, id)
         
+        let fecha = localStorage.getItem('mesa_fecha');
+        let type = localStorage.getItem('mesa_type_reservation');
+        console.log(fecha);
+        console.log(type);
+        store.dispatch(`mesa/${Constant.INITIALIZE_ONE_STATE_MESA}`, id)
+        let data =[fecha,type];
+        console.log(`Elemento 1: ${data[0]}`);
+        console.log(data);
         const stateOne = reactive({
-            mesa: computed(() => store.getters["mesa/getOneMesa"])
+            mesa: computed(() => store.getters["mesa/getOneMesa"]),
+            isLoged: store.getters['user/GetIsAuth'],
         })
-       
-        console.log(stateOne.mesa?.photo);
-        return { stateOne }
+        
+        if (stateOne.isLoged) {
+            useReservationCreate(data);
+            localStorage.setItem('id_mesa',id);
+        }
+        console.log('details',id);
+        console.log('details',stateOne.mesa);
+        const reservation_emit = (data) => {
+            console.log(data);
+          
+            if (stateOne.isLoged) {
+                data.mesa_id = id;
+                useReservationCreate(data)
+                router.go(0)
+            } else {
+                toaster.info('Please login to make a reservation');
+            }
+        }
+        
+        return { stateOne,reservation_emit}
     }
 }
 </script>

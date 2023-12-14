@@ -38,6 +38,7 @@ export default {
         return Api(secrets.URL_SPRING).get('mesaInfinite', { params: { page: page, limit: limit } });
     },//GetOneMesa
     GetOneMesa(id) {
+        console.log('GetOneMesa',id);
         return Api(secrets.URL_SPRING).get('mesa/' + id);
     },//GetOneLinkMesa
 
