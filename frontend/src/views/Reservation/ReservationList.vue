@@ -1,22 +1,24 @@
 <template>
     <font-awesome-icon icon="fa-solid fa-arrow-left" class="fa-2x" style="cursor:pointer; margin-left:0.2em;"
         @click="redirects.return()" />
-    <div class="usersList">
-        <h1 class="tituloDashboard">~Users~</h1><br>
-        <div v-if="state.users">
-            <button class="pulse create" @click="redirects.create()">CREATE</button>
-            <button @click="updateUser()" class="pulse update">UPDATE</button>
-            <button @click="deleteUser()" class="pulse delete">DELETE</button>
+    <div class="categoriList">
+        <h1 class="tituloDashboard">~Reservation~</h1><br> 
+        <div v-if="state.reservations">
+            <button @click="updateReservation()" class="pulse update">UPDATE</button>
+            <button @click="deleteReservation()" class="pulse delete">DELETE</button>
+            <button @click="activateDeactivete(true)" class="pulse create">ACCEPTED</button>
+            <button @click="activateDeactivete(false)" class="pulse delete">NOT ACCEPTED</button>
         </div>
-        <DataTable class="display" :options="{ select: true }" :columns="columns" :data="state.users" ref="table">
+        <DataTable class="display" :options="{ select: true }" :columns="columns" :data="state.reservations"
+            ref="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Photo</th>
-                    <th>Type</th>
-                    <!-- <th>Active</th> -->
+                    <th>Fecha</th>
+                    <th>Reservation type</th>
+                    <th>Mesa</th>
+                    <th>User</th>
+                    <th>Accepted</th>
                 </tr>
             </thead>
         </DataTable>
@@ -39,20 +41,19 @@ export default {
         const store = useStore();
         const router = useRouter();
         DataTable.use(DataTablesLib);
-
-        store.dispatch(`userDashboard/${Constant.INITIALIZE_USER}`);
+        store.dispatch(`reservationDashboard/${Constant.INITIALIZE_RESERVATION}`);
 
         const state = reactive({
-            users: computed(() => store.getters['userDashboard/GetUsers'])
+            reservations: computed(() => store.getters['reservationDashboard/GetReservations'])
         });
 
         const columns = [
             { data: 'id' },
-            { data: 'username' },
-            { data: 'email' },
-            { data: 'photo' },
-            { data: 'type' },
-            // { data: 'is_active' },
+            { data: 'fecha_reserva' },
+            { data: 'type_reservation' },
+            { data: 'mesa_id' },
+            { data: 'user_id' },
+            { data: 'accepted' },
         ];
 
         let dt;
@@ -61,31 +62,46 @@ export default {
             dt = table.value.dt();
         });
 
-        const updateUser = () => {
-            const indexs = dt.rows({ selected: true })[0];
-            if (indexs.length === 1) {
-                const id = state.users[indexs[0]].id;
-                router.push({ name: 'updateUser', params: { id } })
-            } else {
-                toaster.info('You have to select ONE user');
-            }
-        };
-
-        const deleteUser = () => {
-            const indexs = dt.rows({ selected: true })[0];
-            if (indexs.length > 0) {
-                dt.rows({ selected: true }).every(index => store.dispatch(`userDashboard/${Constant.DELETE_USER}`, state.users[index].id));
-            } else {
-                toaster.info('You have to select at last ONE user');
-            }
-        };
-
         const redirects = {
-            create: () => router.push({ name: 'createUser' }),
             return: () => router.push({ name: 'dashboard' }),
         };
 
-        return { state, columns, table, redirects, updateUser, deleteUser };
+
+        const updateReservation = () => {
+            const indexs = dt.rows({ selected: true })[0];
+            if (indexs.length === 1) {
+                const id = state.reservations[indexs[0]].id;
+                router.push({ name: 'updateReservation', params: { id } })
+            } else {
+                toaster.info('You have to select ONE reservation');
+            }
+        };
+
+        const deleteReservation = () => {
+            const indexs = dt.rows({ selected: true })[0];
+            if (indexs.length > 0) {
+                dt.rows({ selected: true }).every(index => store.dispatch(`reservationDashboard/${Constant.DELETE_RESERVATION}`, state.reservations[index].id));
+            } else {
+                toaster.info('You have to select at last ONE reservation');
+            }
+        };
+
+        const activateDeactivete = (status) => {
+            const indexs = dt.rows({ selected: true })[0];
+            if (indexs.length > 0) {
+                dt.rows({ selected: true }).every(index => {
+                    const data = state.reservations[index];
+                    if (data.accepted != status) {
+                        data.accepted = status;
+                        store.dispatch(`reservationDashboard/${Constant.UPDATE_RESERVATION}`, data);
+                    }
+                });
+            } else {
+                toaster.info('You have to select at last ONE reservation');
+            }
+        }
+
+        return { state, columns, table, redirects, updateReservation, deleteReservation, activateDeactivete };
     }
 }
 </script>
@@ -102,7 +118,7 @@ body{
   font-weight: bold;
   font-size: 3em;
 }
-.usersList {
+.categoriList {
     h1 {
         text-align: center;
     }
@@ -143,6 +159,7 @@ button {
         color: #fff;
     }
 }
+
 
 button{
     margin:0.5%;

@@ -1,15 +1,31 @@
 <template>
   <h1 class="tituloDashboard">~ Dashboard ~</h1>
   <div class="container">
-    
-    <router-link to="/dashboard/categories"><button class="pulse">List categories</button></router-link>
-    <br>
-    <router-link to="/dashboard/mesas"><button class="pulse">List mesas</button></router-link>
+  <button class="pulse" @click="redirects.categories()">List categories</button>
+  <br>
+  <button class="pulse" @click="redirects.mesas()">List mesas</button>
+  <br>
+  <button class="pulse" @click="redirects.users()">List users</button>
+  <br>
+  <button class="pulse" @click="redirects.reservations()">List reservations</button>
   </div>
 </template>
 
 <script>
-export default {};
+import { useRouter } from 'vue-router';
+export default {
+  setup() {
+    const router = useRouter();
+    const redirects = {
+      categories: () => router.push({ name: 'categoriesList' }),
+      mesas: () => router.push({ name: 'mesasList' }),
+      users: () => router.push({ name: 'usersList' }),
+      reservations: () => router.push({ name: 'reservationsList' }),
+    };
+    return { redirects };
+  }
+
+};
 </script>
 
 <style lang="scss">
@@ -57,7 +73,7 @@ button.pulse {
   font: inherit;
   height: auto;
   line-height: 1;
-  margin: 5em;
+  margin: 4em;
   padding: 1em 2em;
   border-color: #4daea9;
   background-color: #4daea9;

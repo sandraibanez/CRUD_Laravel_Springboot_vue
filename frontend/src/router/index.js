@@ -97,6 +97,39 @@ const router = createRouter({
       component: () => import('../views/Mesa/MesaCreate.vue'),
       beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
     },
+    //User dashboard//
+    {
+      path: "/dashboard/users",
+      name: "usersList",
+      component: () => import('../views/User/UserList.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+    },
+    {
+      path: "/dashboard/users/update/:id",
+      name: "updateUser",
+      component: () => import('../views/User/UserUpdate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+    },
+    {
+      path: "/dashboard/users/create",
+      name: "createUser",
+      component: () => import('../views/User/UserCreate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+    },
+
+    //Reservation dashboard//
+    {
+      path: "/dashboard/reservations",
+      name: "reservationsList",
+      component: () => import('../views/Reservation/ReservationList.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+    },
+    {
+      path: "/dashboard/reservations/update/:id",
+      name: "updateReservation",
+      component: () => import('../views/Reservation/ReservationUpdate.vue'),
+      beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+    },
   ]
 })
 
