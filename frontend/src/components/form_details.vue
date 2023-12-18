@@ -1,16 +1,10 @@
 <template>
-    <div v-if="!isAdmin">
-        <input type="radio" :disabled="state.dinner_check" v-model="state.dinner" name="type" value="dinner"> Dinner
+   
+    <input type="radio" :disabled="state.dinner_check" v-model="state.dinner" name="type" value="dinner"> Dinner
     <input type="radio" :disabled="state.launch_check" v-model="state.dinner" name="type" value="launch"> Launch
     <input type="data" v-model="state.data_input" name="type" >
-    </div>
     
     
-    <div v-else>
-        <input type="radio" :disabled="state.dinner_check" v-model="state.dinner" name="type" value="dinner" > Dinner
-        <input type="radio" :disabled="state.launch_check" v-model="state.dinner" name="type" value="launch" > Launch
-        <input type="data" v-model="state.data_input" name="type">
-    </div>
     <button @click="send_data()" :disabled="!state.dinner">Reservation</button>
 </template>
 
@@ -32,7 +26,6 @@ export default {
 
         let reserva_id = localStorage.getItem('id_reserv');
         let mesa_id = localStorage.getItem('id_mesa');
-        let admin = localStorage.getItem('isAdmin');
         console.log('reserva_id',reserva_id);
         console.log('mesa_id',mesa_id);
         if (reserva_id != null ){
@@ -105,10 +98,11 @@ export default {
             localStorage.removeItem('date')
             emit('send_data', data);
         }
-    
+
+       
         return { state, send_data }
         }
-
+       
     }
 
 }
