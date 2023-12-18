@@ -3,6 +3,8 @@ package com.springboot.springboot.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.springboot.springboot.security.jwt.AuthTokenFilter;
+import com.springboot.springboot.model.BlacklistToken;
 import com.springboot.springboot.model.Mesa;
 import com.springboot.springboot.model.Reservation;
 import com.springboot.springboot.model.User;
 import com.springboot.springboot.model.UserAndToken;
+import com.springboot.springboot.repository.BlacklistTokenRepository;
 import com.springboot.springboot.repository.MesaRepository;
 import com.springboot.springboot.repository.ReservationRepository;
 import com.springboot.springboot.repository.UserRepository;
@@ -42,7 +46,11 @@ public class UserController {
     private ReservationRepository ReservationRepository;
     @Autowired
     private PasswordEncoder encoder;
-
+    @Autowired
+    private BlacklistTokenRepository BlacklistTokenRepository;
+    @Autowired
+    private AuthTokenFilter authTokenFilter; 
+    
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -141,8 +149,14 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser() {
+   public ResponseEntity<?> logoutUser(HttpServletRequest request) {
         try {
+            String token = authTokenFilter.parseJwt(request);
+            if (BlacklistTokenRepository.TokenExist(token) == 0) {
+                BlacklistToken blacklistToken = new BlacklistToken();
+                blacklistToken.setToken(token);
+                BlacklistTokenRepository.save(blacklistToken);
+            }
             return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (Exception e) {
