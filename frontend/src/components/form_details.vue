@@ -2,6 +2,8 @@
    
     <input type="radio" :disabled="state.dinner_check" v-model="state.dinner" name="type" value="dinner"> Dinner
     <input type="radio" :disabled="state.launch_check" v-model="state.dinner" name="type" value="launch"> Launch
+    <h3>FECHA DE LA RESERVA</h3>
+    <p>Modelo: año-mes-dia</p>
     <input type="data" v-model="state.data_input" name="type" >
     
     
@@ -9,7 +11,7 @@
 </template>
 
 <script>
-import 'v-calendar/dist/style.css'; 
+// import 'v-calendar/dist/style.css'; 
 import { createToaster } from "@meforma/vue-toaster";
 import { getCurrentInstance } from 'vue';
 import { reactive } from 'vue';

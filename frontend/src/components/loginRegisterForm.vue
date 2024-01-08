@@ -85,7 +85,7 @@
 <script>
 import { useRouter } from 'vue-router';
 import { getCurrentInstance, reactive, computed } from 'vue';
-import { useVuelidate } from '@vuelidate/core'
+import { useVuelidate } from '@vuelidate/core' 
 import { required, minLength, email, alphaNum } from '@vuelidate/validators'
 export default {
     props: {

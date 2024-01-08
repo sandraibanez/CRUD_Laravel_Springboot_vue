@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import 'v-calendar/dist/style.css';
+// import 'v-calendar/dist/style.css';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
 import { reactive, computed } from 'vue'
