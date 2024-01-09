@@ -28,10 +28,10 @@ En la seccion de home el usuario puede:
 
 # Reservation
 
-En esta seccion es la mas importante de la pagina web ya que el usuario puede ver el *listado de las mesas* *paginadas*, puede pulsar en una mesa,
-acceder al *details de la mesa* que ha seleccionado y *hacer una reserva de esa mesa* en particular.
-Tambien hay un *search* que busca por el nombre de la mesa.
-El usuario tambien podra *filtrar* las mesas por:
+En esta seccion es la mas importante de la pagina web ya que el usuario puede ver el **listado de las mesas** **paginadas**, puede pulsar en una mesa,
+acceder al **details de la mesa** que ha seleccionado y **hacer una reserva de esa mesa** en particular.
+Tambien hay un **search** que busca por el nombre de la mesa.
+El usuario tambien podra **filtrar** las mesas por:
 * Capacidad.
 * Ver el listado de la mesa de forma ascendente o descendente.
 
@@ -72,20 +72,28 @@ Tener instalado las siguientes herramientas:
 * MySQL
 
 # BACKEND
- *Laravel*
+ **Laravel**
 * cd Backend/Laravel
 * php artisan key:generate
 * php artisan jwt:secret
 * php artisan serve
   
-*Spring-boot*
+**Spring-boot**
 
 * cd Backend/spring-boot
 * php artisan key:generate
 * php artisan jwt:secret
 * mvn spring-boot:run
+  
 # FRONTEND
 
 * cd Frontend/Vue
 * npm install
 * npm run dev
+
+# LIBRERÍAS
+
+Lista de librerías utilizadas en este proyecto:
+
+* [Toastr](https://www.npmjs.com/package/vue-toastr)
+* [Pagination](https://www.npmjs.com/package/vue3-pagination)
