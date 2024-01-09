@@ -28,17 +28,13 @@ En la seccion de home el usuario puede:
 
 # Reservation
 
-En esta seccion es la mas importante de la pagina web ya que el usuario puede ver el listado de las mesas paginadas, puede pulsar en una mesa,
-acceder al details de la mesa que ha seleccionado y hacer una reserva de esa mesa en particular.
-Tambien hay un search que busca por el nombre de la mesa.
-El usuario tambien podra filtrar las mesas por:
+En esta seccion es la mas importante de la pagina web ya que el usuario puede ver el *listado de las mesas* *paginadas*, puede pulsar en una mesa,
+acceder al *details de la mesa* que ha seleccionado y *hacer una reserva de esa mesa* en particular.
+Tambien hay un *search* que busca por el nombre de la mesa.
+El usuario tambien podra *filtrar* las mesas por:
 * Capacidad.
 * Ver el listado de la mesa de forma ascendente o descendente.
 
-* Listado de productos.
-* Paginacion.
-* Detalles del producto.
-* Reserva de la mesa.
 
 # Dashboard
 
@@ -51,4 +47,45 @@ Las acciones que se pueden hacer en esta seccion son las siguientes:
   borrar una reservas, actualizar una reservas y aceptar o no aceptar una reservas.
 # User
 
-Donde aparece el nombre del usuario al clicar se accede a las reservas que tiene ese usuario
+Donde aparece el nombre del usuario al clicar se accede a las reservas que tiene ese usuario.
+El usuario podra acceder a la informacion de esa reserva y podra modificar la informacion de la reserva o borrar la reserva.
+
+# Log out
+
+La aplicación web, consta también, de un módulo de login donde el usuario puede crear una cuenta, e iniciar sesión con ella.
+
+* Login
+* Register
+* Logout
+
+Además el login tiene un token mediante JWT en el que va verificando durante el uso de la web si hay un usuario conectado.
+
+# Puesta en marcha
+
+Es necesario crear el fichero .env en la carpeta de servidor.
+
+Tener instalado las siguientes herramientas:
+
+* Springboot V3.8.8
+* Laravel V9
+* Vue VITE v3.2.7
+* MySQL
+
+# BACKEND
+ *Laravel*
+* cd Backend/Laravel
+* php artisan key:generate
+* php artisan jwt:secret
+* php artisan serve
+  
+*Spring-boot*
+
+* cd Backend/spring-boot
+* php artisan key:generate
+* php artisan jwt:secret
+* mvn spring-boot:run
+# FRONTEND
+
+* cd Frontend/Vue
+* npm install
+* npm run dev
